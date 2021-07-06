@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import pandas as pd
 st.set_option('deprecation.showfileUploaderEncoding', False)
 # Load the pickled model
-pickle_in = open("/content/drive/My Drive/ML lab/second midterm/decision_model.pkl","rb")
+pickle_in = open("decision_model.pkl","rb")
 model=pickle.load(pickle_in)
-dataset= pd.read_csv('/content/drive/My Drive/ML lab/second midterm/PCA and NN Dataset3.csv')
+dataset= pd.read_csv('PCA and NN Dataset3.csv')
 X = dataset.iloc[:, 1:10].values
 from sklearn.preprocessing import LabelEncoder
 labelencoder_X = LabelEncoder()
