@@ -6,18 +6,27 @@ import matplotlib.pyplot as plt
 import pandas as pd
 st.set_option('deprecation.showfileUploaderEncoding', False)
 # Load the pickled model
-pickle_in = open("decision_model.pkl","rb")
-model=pickle.load(pickle_in)
+model = pickle.load(open('decision_model.pkl', 'rb'))
+
 dataset= pd.read_csv('PCA and NN Dataset3.csv')
 X = dataset.iloc[:, 1:10].values
 from sklearn.preprocessing import LabelEncoder
 labelencoder_X = LabelEncoder()
 X[:, 1] = labelencoder_X.fit_transform(X[:, 1])
 X[:, 2] = labelencoder_X.fit_transform(X[:, 2])
+
+from sklearn.impute import SimpleImputer
+imputer = SimpleImputer(missing_values= np.NAN, strategy= 'mean', fill_value=None, verbose=1, copy=True)
+#Fitting imputer object to the independent variables x.   
+imputer = imputer.fit(X[:, 1:10]) 
+#Replacing missing data with the calculated mean value  
+X[:, 1:10]= imputer.transform(X[:, 1:10])
+
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X = sc.fit_transform(X)
-def predict_note_authentication(CreditScore,Geography,Gender,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary):
+
+def predict_note_authentication(Tenure,IsActiveMember,EstimatedSalary):
   output= model.predict(sc.transform([[Tenure,IsActiveMember,EstimatedSalary]]))
   print("Output", output)
   if output==[0]:
