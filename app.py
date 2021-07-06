@@ -26,8 +26,8 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 X = sc.fit_transform(X)
 
-def predict_note_authentication(CreditScore,Geography,Gender,Age,Tenure,Balanve,HasCrCard,IsActiveMember,EstimatedSalary):
-  output= model.predict(sc.transform([[CreditScore,Geography,Gender,Age,Tenure,Balanve,HasCrCard,IsActiveMember,EstimatedSalary]]))
+def predict_note_authentication(CreditScore,Geography,Gender,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary):
+  output= model.predict(sc.transform([[CreditScore,Geography,Gender,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary]]))
   print("Output", output)
   if output==[0]:
     prediction="customer not left the bank"
@@ -60,7 +60,7 @@ def main():
     EstimatedSalary =  st.text_input("EstimatedSalary","Type Here")
     resul=""
     if st.button("Predict"):
-      result=predict_note_authentication(CreditScore,Geography,Gender,Age,Tenure,Balanve,HasCrCard,IsActiveMember,EstimatedSalary)
+      result=predict_note_authentication(CreditScore,Geography,Gender,Age,Tenure,Balance,HasCrCard,IsActiveMember,EstimatedSalary)
       st.success('Model has predicted {}'.format(result))
     if st.button("About"):
       st.text("Developed by Pritesh Kumar")
